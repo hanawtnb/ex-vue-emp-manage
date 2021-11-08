@@ -3,6 +3,7 @@
     <Header />
     <div class="top-wrapper">
       <router-view />
+      <!-- rooter-viewのところが毎回切り替わってシングルページアプリケーションになる -->
     </div>
 
     <Footer />
