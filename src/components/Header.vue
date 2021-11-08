@@ -9,7 +9,7 @@
         </div>
 
         <div class="header-right">
-          <a href="../../documents/html_mock/registerAdmin.html">
+          <router-link to="/registerAdmin">
             管理者登録
           </a>
           <a href="../../documents/html_mock/login.html">
