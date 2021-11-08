@@ -1,3 +1,7 @@
+/**
+ * 管理者を表すクラスです。
+ *
+ */
 export class Administrator {
   constructor(
     private _id: number,
