@@ -1,5 +1,5 @@
 /**
- * 管理者を表すクラスです。
+ * 管理者を表すクラスです.
  *
  */
 export class Administrator {
