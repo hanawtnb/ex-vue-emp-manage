@@ -1,7 +1,6 @@
 /**
  * 従業員のプロフィールを表すクラスです.
  */
-
 export class Employee {
     constructor(
         private _id:number,
