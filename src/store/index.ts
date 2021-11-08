@@ -1,13 +1,85 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { Employee } from "@/types/employee";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   strict: true,
-  state: {}, // end state
-  actions: {}, // end actions
-  mutations: {}, // end mutations
-  getters: {}, // end getters
+  state: {
+    // 従業員数
+    totalEmployeeCount: 0,
+
+    employees: new Array<Employee>(),
+  },
+  // end state
+
+  actions: {
+    /**
+     * 従業員一覧情報をWebAPIから取得する.
+     *
+     * @remarks
+     * 従業員一覧情報をWebAPIから取得してmutationを呼び出す。
+     * @param context - コンテキストオブジェクト
+     */
+    async getEmployeeList(context) {
+      const response = await axios.get(
+        "http://34.220.54.161:8080/ex-emp-api/employee/employees"
+      );
+      console.dir("response:" + JSON.stringify(response));
+      const payload = response.data;
+      context.commit("showEmployeeList", payload);
+    },
+  },
+  // end actions
+
+  mutations: {
+    /**
+     * 従業員一覧情報を作成してstateに格納する.
+     * @param state - ステートオブジェクト
+     * @param payload - JSON形式の従業員数と従業員一覧情報
+     */
+    showEmployeeList(state, payload) {
+      state.totalEmployeeCount = payload.totalEmployeeCount;
+      state.employees = payload.employees;
+      // for (const employee of payload.employees) {
+      //   state.employees.push(employee);
+      // }
+    },
+  },
+  // end mutations
+
+  getters: {
+    /**
+     * 従業員数を返す.
+     * @param state - ステートオブジェクト
+     */
+    getEmployeeCount(state) {
+      return state.totalEmployeeCount;
+    },
+    /**
+     * 従業員一覧を返す.
+     * @param state - ステートオブジェクト
+     */
+    getEmployees(state) {
+      return state.employees;
+    },
+    /**
+     * IDから従業員を検索して返す.
+     * @param state - ステートオブジェクト
+     */
+    getEmployeeById(state) {
+      return (id: number) => {
+        const hitEmployeeID = [];
+        for (const employee of state.employees) {
+          if (employee.id == id) {
+            hitEmployeeID.push(employee);
+          }
+        }
+        return hitEmployeeID[0];
+      };
+    },
+  }, // end getters
   modules: {}, // end modules
 });

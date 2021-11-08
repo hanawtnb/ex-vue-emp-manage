@@ -9,6 +9,14 @@ const routes: Array<RouteConfig> = [
   //   path: "*",
   //   component: () => import("../components/LoginAdmin.vue"),
   // },
+  {
+    path: "/registerAdmin",
+    component: () => import("../views/RegisterAdmin.vue"),
+  },
+  {
+    path: "/loginAdmin",
+    component: () => import("../views/LoginAdmin.vue"),
+  },
 ];
 
 const router = new VueRouter({
