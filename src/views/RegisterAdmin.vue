@@ -73,12 +73,20 @@ import axios from "axios";
 
 @Component
 export default class RegisterAdmin extends Vue {
+  //ログイン時のエラーメッセージ
   errorMessage = "";
+  //  姓
   lastName = "";
+  //   名
   firstName = "";
+  //   メールアドレス
   mailAddress = "";
+  //   パスワード
   password = "";
-
+  /**
+   * 管理者情報を登録.
+   *
+   */
   async registerAdmin(): Promise<void> {
     const response = await axios.post(
       "http://34.220.54.161:8080/ex-emp-api/insert",
@@ -91,7 +99,7 @@ export default class RegisterAdmin extends Vue {
     if (response.data.status === "success") {
       this["$router"].push("/loginAdmin");
     } else if (response.data.status === "error") {
-      this.errorMessage = response.data.error;
+      this.errorMessage = "登録できませんでした" + response.data.message;
     }
   }
 }
