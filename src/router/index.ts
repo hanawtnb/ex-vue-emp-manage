@@ -22,8 +22,13 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/EmployeeList.vue"),
   },
   {
+    // Employee.DetailのparseInt(this["$route"].params.id)と紐づいている。
     path: "/employeeDetail/:id",
     component: () => import("../views/EmployeeDetail.vue"),
+  },
+  {
+    path: "/logoutAdmin",
+    component: () => import("../views/LogoutAdmin.vue"),
   },
 ];
 
