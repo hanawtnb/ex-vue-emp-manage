@@ -70,7 +70,7 @@ export default class loginAdmin extends Vue {
    */
   async loginAdmin(): Promise<void> {
     const response = await axios.post(
-      "http://54.200.203.52:8080/ex-emp-api/login",
+      "http://153.127.48.168:8080/ex-emp-api/login",
       {
         mailAddress: this.mailAddress,
         password: this.password,
@@ -78,8 +78,10 @@ export default class loginAdmin extends Vue {
     );
     if (response.data.status == "success") {
       this["$router"].push("/employeeList");
+      //   vue.js公式のルーターでパス先に飛ぶことができる。
     } else if (response.data.status == "error") {
-      this.errorMessage = "ログインに失敗しました" + response.data.message;
+      this.errorMessage =
+        "ログインに失敗しました(" + response.data.message + ")";
     }
   }
 }

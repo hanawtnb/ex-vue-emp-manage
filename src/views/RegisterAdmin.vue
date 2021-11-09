@@ -89,7 +89,7 @@ export default class RegisterAdmin extends Vue {
    */
   async registerAdmin(): Promise<void> {
     const response = await axios.post(
-      "http://54.200.203.52:8080/ex-emp-api/insert",
+      "http://153.127.48.168:8080/ex-emp-api/insert",
       {
         name: this.lastName + " " + this.firstName,
         mailAddress: this.mailAddress,
@@ -99,7 +99,7 @@ export default class RegisterAdmin extends Vue {
     if (response.data.status === "success") {
       this["$router"].push("/loginAdmin");
     } else if (response.data.status === "error") {
-      this.errorMessage = "登録できませんでした" + response.data.message;
+      this.errorMessage = "登録できませんでした(" + response.data.message + ")";
     }
   }
 }

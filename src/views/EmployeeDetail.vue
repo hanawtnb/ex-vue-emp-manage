@@ -71,14 +71,14 @@
                 <div class="input-field col s12">
                   <div class="error">{{ errorMessage }}</div>
                   <input
-                    v-model="currentDependentsCount"
                     id="dependentsCount"
                     type="text"
                     class="validate"
                     value="3"
                     required
+                    v-model="currentDependentsCount"
                   />
-                  <label for="dependentsCount2">扶養人数</label>
+                  <label for="dependentsCount">扶養人数</label>
                 </div>
               </td>
             </tr>
@@ -123,7 +123,7 @@ export default class EmployeeDetail extends Vue {
   created(): void {
     const employeeId = parseInt(this["$route"].params.id);
     this.currentEmployee = this["$store"].getters.getEmployeeById(employeeId);
-    this.currentEmployeeImage = `http://54.200.203.52:8080/ex-emp-api/img/${this.currentEmployee.image}`;
+    this.currentEmployeeImage = `http://153.127.48.168:8080/ex-emp-api/img/${this.currentEmployee.image}`;
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
   }
 
@@ -132,16 +132,16 @@ export default class EmployeeDetail extends Vue {
    */
   async update(): Promise<void> {
     const response = await axios.post(
-      "http://54.200.203.52:8080/ex-emp-api/update",
+      "http://153.127.48.168:8080/ex-emp-api/employee/update",
       {
         id: this.currentEmployee.id,
-        dependentsCount: this.currentEmployee.dependentsCount,
+        dependentsCount: this.currentDependentsCount,
       }
     );
     if (response.data.status === "success") {
       this["$router"].push("/employeeList");
     } else if (response.data.status === "error") {
-      this.errorMessage = "更新できませんでした" + response.data.message;
+      this.errorMessage = "更新できませんでした(" + response.data.message + ")";
     }
   }
 }

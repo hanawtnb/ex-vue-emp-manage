@@ -25,7 +25,7 @@ export default new Vuex.Store({
      */
     async getEmployeeList(context) {
       const response = await axios.get(
-        "http://54.200.203.52:8080/ex-emp-api/employee/employees"
+        "http://153.127.48.168:8080/ex-emp-api/employee/employees"
       );
       console.dir("response:" + JSON.stringify(response));
       const payload = response.data;
@@ -44,7 +44,22 @@ export default new Vuex.Store({
       state.totalEmployeeCount = payload.totalEmployeeCount;
       state.employees = payload.employees;
       // for (const employee of payload.employees) {
-      //   state.employees.push(employee);
+      //   state.employees.push(
+      // new Employee(
+      //   employee.id,
+      //   employee.name,
+      //   employee.image,
+      //   employee.gender,
+      //   employee.fireDate,
+      //   employee.mailAddress,
+      //   employee.zipCode,
+      //   employee.address,
+      //   employee.telephone,
+      //   employee.salary,
+      //   employee.charasteristics,
+      //   employee.dependentsCount,
+      // )
+      // );
       // }
     },
   },
@@ -65,6 +80,16 @@ export default new Vuex.Store({
     getEmployees(state) {
       return state.employees;
     },
+
+    // getEmployees1to10(state) {
+    //   const employee1to10 = [];
+    //   for (const employee of state.employees) {
+    //     if (employee.id <= 10) {
+    //       employee1to10.push(employee);
+    //     }
+    //     return employee1to10;
+    //   }
+    // },
     /**
      * IDから従業員を検索して返す.
      * @param state - ステートオブジェクト
