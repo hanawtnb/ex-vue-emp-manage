@@ -10,6 +10,7 @@ export class Employee {
     private _hireDate: Date,
     private _mailAddress: string,
     private _zipCode: string,
+    private _address: string,
     private _telephone: string,
     private _salary: number,
     private _characteristics: string,
